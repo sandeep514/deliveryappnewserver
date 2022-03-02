@@ -1,30 +1,26 @@
-import React, {useEffect, useState} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
-  FlatList,
   Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
+  Pressable, ScrollView, StyleSheet,
   TouchableHighlight,
-  View,
+  View
 } from 'react-native';
-import {Icon, ListItem} from 'react-native-elements';
-import {Colors} from '../components/Colors';
-import MainScreen from '../layout/MainScreen';
-import {heightToDp} from '../utils/Responsive';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Icon, ListItem } from 'react-native-elements';
+import uuid from 'react-native-uuid';
 import {
   getPriorityDrivers,
-  getSaleItemByInvoice,
-  saveSortedPriority,
+  getSaleItemByInvoice
 } from '../api/apiService';
-import ItemComponent from './component/inputcomponent';
-import uuid from 'react-native-uuid';
-
+import { Colors } from '../components/Colors';
+import MainScreen from '../layout/MainScreen';
 import cache from '../utils/cache';
+import { heightToDp } from '../utils/Responsive';
+
 
 function LoadingComponent() {
   return (
@@ -48,7 +44,7 @@ export default function DashboardRoutes({navigation, route}) {
   //   getRoutes();
   // }, [reloader]);
 
-  function renderItemComponent({item, index}) {
+  function renderItemComponent(item, index) {
     return (
       <TouchableHighlight
         style={{padding: 0, margin: 0}}
@@ -264,14 +260,9 @@ export default function DashboardRoutes({navigation, route}) {
         {loading == true ? (
           <LoadingComponent />
         ) : (
-          <View style={{padding: 0, margin: 0}}>
-            <FlatList
-              data={listRoute}
-              renderItem={renderItemComponent}
-              refreshing={loading}
-              onRefresh={getRoutes}
-            />
-          </View>
+          <ScrollView style={{padding: 0, margin: 0}}>
+            {listRoute?.map(renderItemComponent)}
+          </ScrollView>
         )}
       </View>
     </MainScreen>

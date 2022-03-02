@@ -1,7 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import * as Sentry from '@sentry/react-native';
 import React from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import Nav from './routes/Nav';
-import SplashScreen from 'react-native-splash-screen'
 
 Sentry.init({
   dsn: 'https://ff37d5a526dc466492c466cef6a3dcde@o1147172.ingest.sentry.io/6217087',
